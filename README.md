@@ -1,5 +1,7 @@
 # Warning!
 
+Test 123
+
 This repo is not actively maintained or developed by kingofthestack. PRs, issues, and feature requests may not receive any response.
 
 Thank you for the support over the years for RCW! We appologize for the inconvenience.
@@ -9,10 +11,10 @@ Thank you for the support over the years for RCW! We appologize for the inconven
 `react-chat-window` provides an intercom-like chat window that can be included easily in any project for free. It provides no messaging facilities, only the view component.
 
 ![GitHub license](https://img.shields.io/github/package-json/v/kingofthestack/react-chat-window.svg?style=flat-square) <a href="https://www.npmjs.com/package/react-chat-window" target="\_parent">
-  <img alt="" src="https://img.shields.io/npm/dm/react-chat-window.svg" />
+<img alt="" src="https://img.shields.io/npm/dm/react-chat-window.svg" />
 </a>
 <a href="https://github.com/kingofthestack/react-chat-window" target="\_parent">
-  <img alt="" src="https://img.shields.io/github/stars/kingofthestack/react-chat-window.svg?style=social&label=Star" />
+<img alt="" src="https://img.shields.io/github/stars/kingofthestack/react-chat-window.svg?style=social&label=Star" />
 </a>
 <br/>
 
@@ -27,6 +29,7 @@ Thank you for the support over the years for RCW! We appologize for the inconven
 ## [Demo](https://kingofthestack.github.io/react-chat-window/)
 
 ## Table of Contents
+
 - [Installation](#installation)
 - [Example](#example)
 - [Components](#components)
@@ -39,49 +42,54 @@ $ npm install react-chat-window
 
 ## Example
 
-``` javascript
-import React, {Component} from 'react'
-import {Launcher} from 'react-chat-window'
+```javascript
+import React, { Component } from "react";
+import { Launcher } from "react-chat-window";
 
 class Demo extends Component {
-
   constructor() {
     super();
     this.state = {
-      messageList: []
+      messageList: [],
     };
   }
 
   _onMessageWasSent(message) {
     this.setState({
-      messageList: [...this.state.messageList, message]
-    })
+      messageList: [...this.state.messageList, message],
+    });
   }
 
   _sendMessage(text) {
     if (text.length > 0) {
       this.setState({
-        messageList: [...this.state.messageList, {
-          author: 'them',
-          type: 'text',
-          data: { text }
-        }]
-      })
+        messageList: [
+          ...this.state.messageList,
+          {
+            author: "them",
+            type: "text",
+            data: { text },
+          },
+        ],
+      });
     }
   }
 
   render() {
-    return (<div>
-      <Launcher
-        agentProfile={{
-          teamName: 'react-chat-window',
-          imageUrl: 'https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png'
-        }}
-        onMessageWasSent={this._onMessageWasSent.bind(this)}
-        messageList={this.state.messageList}
-        showEmoji
-      />
-    </div>)
+    return (
+      <div>
+        <Launcher
+          agentProfile={{
+            teamName: "react-chat-window",
+            imageUrl:
+              "https://a.slack-edge.com/66f9/img/avatars-teams/ava_0001-34.png",
+          }}
+          onMessageWasSent={this._onMessageWasSent.bind(this)}
+          messageList={this.state.messageList}
+          showEmoji
+        />
+      </div>
+    );
   }
 }
 ```
@@ -96,24 +104,23 @@ For more detailed examples see the demo folder.
 
 Launcher props:
 
-|      prop        | type   | required | description |
-|------------------|--------|----------|-------------|
-| agentProfile     | [object](#agent-profile-objects) | yes | Represents your product or service's customer service agent. Fields: imageUrl (string), teamName (string). |
-| handleClick      | function | yes | Intercept the click event on the launcher. No argument sent when function is called. |
-| isOpen           | boolean | yes | Force the open/close state of the chat window. If this is not set, it will open and close when clicked. |
-| messageList      | [[message](#message-objects)] | yes | An array of message objects to be rendered as a conversation. |
-| mute             | boolean | no | Don't play sound for incoming messages. Defaults to `false`. |
-| newMessagesCount | number | no | The number of new messages. If greater than 0, this number will be displayed in a badge on the launcher. Defaults to `0`. |
-| onFilesSelected  | function([fileList](https://developer.mozilla.org/en-US/docs/Web/API/FileList)) | no | Called after file has been selected from dialogue in chat window. |
-| onMessageWasSent | function([message](#message-objects)) | yes | Called when a message is sent, with a message object as an argument. |
-| showEmoji        | boolean | no | Whether or not to show the emoji button in the input bar. Defaults to `true`.
-
+| prop             | type                                                                            | required | description                                                                                                               |
+| ---------------- | ------------------------------------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------- |
+| agentProfile     | [object](#agent-profile-objects)                                                | yes      | Represents your product or service's customer service agent. Fields: imageUrl (string), teamName (string).                |
+| handleClick      | function                                                                        | yes      | Intercept the click event on the launcher. No argument sent when function is called.                                      |
+| isOpen           | boolean                                                                         | yes      | Force the open/close state of the chat window. If this is not set, it will open and close when clicked.                   |
+| messageList      | [[message](#message-objects)]                                                   | yes      | An array of message objects to be rendered as a conversation.                                                             |
+| mute             | boolean                                                                         | no       | Don't play sound for incoming messages. Defaults to `false`.                                                              |
+| newMessagesCount | number                                                                          | no       | The number of new messages. If greater than 0, this number will be displayed in a badge on the launcher. Defaults to `0`. |
+| onFilesSelected  | function([fileList](https://developer.mozilla.org/en-US/docs/Web/API/FileList)) | no       | Called after file has been selected from dialogue in chat window.                                                         |
+| onMessageWasSent | function([message](#message-objects))                                           | yes      | Called when a message is sent, with a message object as an argument.                                                      |
+| showEmoji        | boolean                                                                         | no       | Whether or not to show the emoji button in the input bar. Defaults to `true`.                                             |
 
 ### Message Objects
 
 Message objects are rendered differently depending on their type. Currently, only text, file, and emoji types are supported. Each message object has an `author` field which can have the value 'me' or 'them'.
 
-``` javascript
+```javascript
 {
   author: 'them',
   type: 'text',
